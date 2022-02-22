@@ -37,7 +37,7 @@ router.post("/login",isloginnull,loginexist,logincontroller)
 router.post("/invite",isverifytoken,ownervalidator,invitecontroller)
 router.post("/inviteaccept/:inviteid",isverifytoken,isEmailunique,ismobilenolength,inviteuseracceptcontroller)
 
-//BLOG
+//BLOGdata
 router.post("/blog",isverifytoken,istitlethere,isdesthere,iscategorythere,blogcontroller)
 router.get("/blog",isverifytoken,getpostcontroller)
 router.patch("/blog",isverifytoken,loginexist,updateblogcontroller)
