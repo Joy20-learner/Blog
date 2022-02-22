@@ -9,7 +9,7 @@ const findblogidindb = async (userid) =>
 await mongoclient.db("Blog").collection("blogdata").findOne({ ownerid:userid });
 
  const isEmailindb = async (email) => 
-  await mongoclient.db("Blog").collection("Signin").findOne({ email:email });
+  await mongoclient.db("Blog").collection("Signin").findOne({email:email});
 
   const finduseridinarticle= async(userid)=>
   await mongoclient.db("Blog").collection("articledata").findOne({userid})
@@ -53,6 +53,9 @@ mongoclient.db("Blog").collection("commentdata").updateOne({articleid},{$push:{c
  const addlike = async(articleid,userid)=>
    mongoclient.db("Blog").collection("articledata").updateOne({articleid},{$push:{like:userid}}) 
 
+   const addTeamDetails= async(inviteid,email,password,photo,mobileno)=>
+   mongoclient.db("Blog").collection("invitationLink")
+   .updateOne({inviteid},{$push:{TeamMemberDetails:{email,password,photo,mobileno}}})
    //update comment inside article 
    //const commentinarticle = async(articleid,userid)=>
    //mongoclient.db("Blog").collection("articledata").updateOne({articleid:articleid},{$push:{comment:userid}})
@@ -81,15 +84,21 @@ mongoclient.db("Blog").collection("commentdata").updateOne({articleid},{$push:{c
    const deletearticle= async(articleid,articlewriterid)=>
    mongoclient.db("Blog").collection("articledata").deleteOne({articleid,articlewriterid})
 
-  
+
+  const insertaccounttype= async(ownerid,fullname,AccountType,inviteid)=>
+  mongoclient.db("Blog").collection("invitationLink").insertOne({ownerid,fullname,AccountType,inviteid})
+
+  const updateTeamMemberData= async(inviteid,name,email,password,photo,mobileno)=>
+  mongoclient.db("Blog").collection("invitationLink").updateOne({inviteid},{$set:{name,email,password,photo,mobileno}})
  
 
 module.exports={findblogidindb,findarticleidindb,isEmailindb,finduseridinarticle,finduseridincomment,
                  insertsignupdata,createblog,createarticle,
-                addlike,addcomment,addlikeincomment,
+                addlike,addcomment,addlikeincomment,addTeamDetails,
                 getblog,getarticle,
                 updateblog,updatearticle,
-                deleteblog,deletearticle}
+                deleteblog,deletearticle,
+              insertaccounttype,updateTeamMemberData}
 
 
 // like: [

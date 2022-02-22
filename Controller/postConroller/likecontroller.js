@@ -1,7 +1,8 @@
 const { addlike } =  require("../../Database/query")
 
 const likecontroller=async (ctx)=>{
-    const articleid=ctx.params.articleid
+    const {articleid}=ctx.params
+    console.log(articleid)
     const {userid}= ctx.state.userdata
 
     
