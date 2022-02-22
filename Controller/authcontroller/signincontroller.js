@@ -9,7 +9,7 @@ const { generatetoken } = require("../../Helper/token");
 
 const signincontroller=async(ctx)=>{
     
-    const { username, email,password,photo,mobileno} = ctx.request.body
+    const { username, email,password,photo,mobileno,accountType} = ctx.request.body
     const uid= uuidv4()
     
     //console.log(uid)
@@ -20,7 +20,7 @@ const signincontroller=async(ctx)=>{
     const hashpass =hashingpassword(password)
     console.log(hashpass)
     ctx.state.uid=uid
-     await insertsignupdata(uid,username,email,hashpass,photo,mobileno)
+     await insertsignupdata(uid,username,email,hashpass,photo,mobileno,accountType)
     return ctx.body={success:true,message:token}
 }
 module.exports={signincontroller}

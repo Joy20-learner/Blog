@@ -10,7 +10,7 @@ const { isverifytoken } = require('../Validator/isverifytoken')
 const loginexist = require('../Validator/authvalidator/loginexist')
 const ismobilenolength = require('../Validator/authvalidator/ismobilenolength')
 const blogcontroller = require('../Controller/postConroller/blogcontroller')
-const { istitlethere, isdesthere, iscategorythere, isarticlethere } = require('../Validator/postvalidator/helpervalidator')
+const { istitlethere, isdesthere, iscategorythere, isarticlethere, likeexist } = require('../Validator/postvalidator/helpervalidator')
 const articlecontroller = require('../Controller/postConroller/articlecontroller')
 const likecontroller = require('../Controller/postConroller/likecontroller')
 const getpostcontroller = require('../Controller/postConroller/getblogcontroller')
@@ -24,6 +24,7 @@ const likeincommentcontroller= require('../Controller/postConroller/likeincommen
 const invitecontroller = require('../Controller/postConroller/invitecontroller')
 const ownervalidator = require('../Validator/postvalidator/ownervalidator')
 const inviteuseracceptcontroller = require('../Controller/postConroller/inviteuseracceptcontroller')
+const useralreadyliked = require('../Validator/postvalidator/useralreadyliked')
 
 
 
@@ -51,7 +52,7 @@ router.patch("/article",isverifytoken,loginexist,updatearticlecontroller)
 router.delete("/article/delete/:articleid",isverifytoken,loginexist,deletearticlecontroller)
 
 //LIKE COMMENT
-router.post("/article/like/:articleid",isverifytoken,likecontroller)
+router.post("/article/like/:articleid",isverifytoken,useralreadyliked,likecontroller)
 router.post("/article/comment/:articleid",isverifytoken,commentcontroller)
 router.post("/article/comment/like/:articleid",isverifytoken,likeincommentcontroller)
 

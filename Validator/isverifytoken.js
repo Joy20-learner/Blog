@@ -26,7 +26,7 @@ const isverifytoken=async(ctx,next)=>{
     
     if(!userdata)
         return ctx.body={status:false,message:"User not exist"}
-     ctx.state.userdata=userdata  
+     ctx.state.userdata=userdata
   //  ctx.state.blogdata=blogdata
     return next()
 }

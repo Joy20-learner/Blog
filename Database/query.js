@@ -9,25 +9,25 @@ const findblogidindb = async (userid) =>
 await mongoclient.db("Blog").collection("blogdata").findOne({ ownerid:userid });
 
  const isEmailindb = async (email) => 
-  await mongoclient.db("Blog").collection("Signin").findOne({email:email});
+  await mongoclient.db("Blog").collection("Signin").findOne({email});
 
-  const finduseridinarticle= async(userid)=>
-  await mongoclient.db("Blog").collection("articledata").findOne({userid})
+  const finduseridinarticle= async(articlewriterid)=>
+  await mongoclient.db("Blog").collection("articledata").findOne({articlewriterid})
 
   
   const finduseridincomment= async(userid)=>
   await mongoclient.db("Blog").collection("commentdata").findOne({userid})
   
 const findarticleidindb = async (articleid,userid) => 
-await mongoclient.db("Blog").collection("articledata").findOne({articleid:articleid, articlewriterid:userid });
+await mongoclient.db("Blog").collection("articledata").findOne({articleid, articlewriterid:userid });
 
 
 
-const insertsignupdata = async (userid,username, email, hashpassword,photo,mobileno) =>
+const insertsignupdata = async (userid,username, email, hashpassword,photo,mobileno,accountType) =>
   mongoclient
     .db("Blog")
     .collection("Signin")
-    .insertOne({ userid:userid,username: username, email: email, password: hashpassword ,photo:photo,mobileno:mobileno});
+    .insertOne({ userid,username, email, password: hashpassword ,photo,mobileno,accountType});
 
     
 
@@ -35,7 +35,7 @@ const createblog = async(blogid,ownerid,category,title,photo,description) =>
     mongoclient
     .db("Blog")
     .collection("blogdata")
-    .insertOne({blogid:blogid,ownerid:ownerid,category,title,photo,description,date: new Date()});
+    .insertOne({blogid,ownerid,category,title,photo,description,date: new Date()});
 
 
 
@@ -90,15 +90,29 @@ mongoclient.db("Blog").collection("commentdata").updateOne({articleid},{$push:{c
 
   const updateTeamMemberData= async(inviteid,name,email,password,photo,mobileno)=>
   mongoclient.db("Blog").collection("invitationLink").updateOne({inviteid},{$set:{name,email,password,photo,mobileno}})
+
+  const titleSame =async (title)=>
+  mongoclient.db("Blog").collection("artiledata").findOne({title})
  
+  const mobilenoSame =async (mobileno)=>
+  mongoclient.db("Blog").collection("Signin").findOne({mobileno})
+
+  const iscommentthere =async (comment)=>
+  mongoclient.db("Blog").collection("artiledata").findOne({comment})
+
+  
+  const islikethere =async (userid)=>
+  mongoclient.db("Blog").collection("artiledata").findOne({articlewriterid:userid})
+
 
 module.exports={findblogidindb,findarticleidindb,isEmailindb,finduseridinarticle,finduseridincomment,
                  insertsignupdata,createblog,createarticle,
-                addlike,addcomment,addlikeincomment,addTeamDetails,
-                getblog,getarticle,
-                updateblog,updatearticle,
-                deleteblog,deletearticle,
-              insertaccounttype,updateTeamMemberData}
+                 addlike,addcomment,addlikeincomment,addTeamDetails,
+                 getblog,getarticle,
+                 updateblog,updatearticle,
+                 deleteblog,deletearticle,
+                 insertaccounttype,updateTeamMemberData,
+                 titleSame,mobilenoSame,iscommentthere,islikethere}
 
 
 // like: [
