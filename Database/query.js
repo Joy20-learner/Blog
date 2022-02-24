@@ -105,6 +105,7 @@ mongoclient.db("Blog").collection("commentdata").updateOne({articleid},{$push:{c
   mongoclient.db("Blog").collection("artiledata").findOne({articlewriterid:userid})
 
 
+
 module.exports={findblogidindb,findarticleidindb,isEmailindb,finduseridinarticle,finduseridincomment,
                  insertsignupdata,createblog,createarticle,
                  addlike,addcomment,addlikeincomment,addTeamDetails,

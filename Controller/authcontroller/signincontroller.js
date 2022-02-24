@@ -18,7 +18,7 @@ const signincontroller=async(ctx)=>{
 
     const token=generatetoken({email})
     const hashpass =hashingpassword(password)
-    console.log(hashpass)
+    //console.log(hashpass)
     ctx.state.uid=uid
      await insertsignupdata(uid,username,email,hashpass,photo,mobileno,accountType)
     return ctx.body={success:true,message:token}

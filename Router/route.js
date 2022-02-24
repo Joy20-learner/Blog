@@ -25,13 +25,15 @@ const invitecontroller = require('../Controller/postConroller/invitecontroller')
 const ownervalidator = require('../Validator/postvalidator/ownervalidator')
 const inviteuseracceptcontroller = require('../Controller/postConroller/inviteuseracceptcontroller')
 const useralreadyliked = require('../Validator/postvalidator/useralreadyliked')
+const passwordvalidator = require('../Validator/authvalidator/passwordvalidator')
+const emailvalidator = require('../Validator/authvalidator/emailvalidator')
 
 
 
 const router = new koarouter()
 
  //REGISTER LOGIN
-router.post("/signin",issigninnull,isEmailunique,ismobilenolength,signincontroller)
+router.post("/signin",issigninnull,isEmailunique,emailvalidator,passwordvalidator,ismobilenolength,signincontroller)
 router.post("/login",isloginnull,loginexist,logincontroller)
 
 //LINK GENERATE

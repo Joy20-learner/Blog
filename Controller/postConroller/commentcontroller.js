@@ -1,5 +1,5 @@
 const {v4: uuidv4} = require("uuid")
-const { addcomment, findarticleidindb } = require("../../Database/query")
+const { addcomment } = require("../../Database/query")
 
 const commentcontroller= async(ctx)=>{
     const {comment}=ctx.request.body

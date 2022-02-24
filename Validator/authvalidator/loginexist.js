@@ -4,10 +4,10 @@ const {  isEmailindb } = require("../../Database/query")
 const loginexist = async(ctx,next)=>{
     const {email}= ctx.request.body
   
-    console.log(email,"Loginexist 7")
+    //console.log(email,"Loginexist 7")
 
     const data = await isEmailindb(email)
-    console.log(data,"loginexist")
+   // console.log(data,"loginexist")
     
     if(!data){
         ctx.body={success:false,message:"Signin first "}
@@ -15,7 +15,7 @@ const loginexist = async(ctx,next)=>{
     //  const newpassword= await hashingpasswordverify(password,data.password)
     //     console.losg(await d)
 
-  ctx.state={data}
+  //ctx.state={data}
     return next()
 }
 
