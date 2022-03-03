@@ -31,6 +31,7 @@ const emailvalidator = require('../Validator/authvalidator/emailvalidator')
 
 
 const router = new koarouter()
+//router.post("/signin",isEmailunique)
 
  //REGISTER LOGIN
 router.post("/signin",issigninnull,isEmailunique,emailvalidator,passwordvalidator,ismobilenolength,signincontroller)
