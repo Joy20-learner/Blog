@@ -16,6 +16,7 @@ const url =
 
 const conn = MongoClient;
 let mongoClient = new MongoClient(url,{});
+if(process.env.NODE_ENV!="test")
 mongoClient
   .connect()
   .then(() => console.log("DB connected successfully"))
